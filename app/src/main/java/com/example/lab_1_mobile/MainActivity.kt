@@ -60,14 +60,12 @@ fun BusinessCardApp() {
 fun MainInfoSection() {
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
         Image(
+
             painter = painterResource(id = R.drawable.my_photo),
-            contentDescription = "My_Photo",
-            modifier = Modifier.size(dimensionResource(id = R.dimen.logo_size))
-//            painter = painterResource(id = R.drawable.my_photo),
-//            contentDescription = null,
-//            modifier = Modifier
-//                .size(dimensionResource(id = R.dimen.logo_size))
-//                .clip(CircleShape)
+            contentDescription = null,
+            modifier = Modifier
+                .size(dimensionResource(id = R.dimen.logo_size))
+                .clip(CircleShape)
         )
         Text(
             text = stringResource(id = R.string.full_name),
@@ -80,8 +78,6 @@ fun MainInfoSection() {
         Text(
             text = stringResource(id = R.string.student_group),
             fontSize = dimensionResource(id = R.dimen.text_size_info).value.sp,
-            //color = Color.Gray,
-            //color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.7f),
             textAlign = TextAlign.Center
         )
     }
@@ -109,7 +105,6 @@ fun ContactItem(icon: ImageVector, text: String) {
             tint = MaterialTheme.colorScheme.primary,
             modifier = Modifier.size(dimensionResource(id = R.dimen.icon_size))
         )
-        //Spacer(modifier = Modifier.width(dimensionResource(id = R.dimen.padding_medium)))
         Text(
             text = text,
             fontSize = dimensionResource(id = R.dimen.text_size_info).value.sp,
