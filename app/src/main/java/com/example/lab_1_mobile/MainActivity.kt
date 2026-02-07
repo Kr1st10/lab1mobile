@@ -3,45 +3,117 @@ package com.example.lab_1_mobile
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Email
+import androidx.compose.material.icons.filled.Info
+import androidx.compose.material.icons.filled.Phone
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import com.example.lab_1_mobile.ui.theme.Lab_1_MobileTheme
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.dimensionResource
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.sp
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
         setContent {
-            Lab_1_MobileTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
-                }
+            Surface(
+                modifier = Modifier.fillMaxSize(),
+                color = MaterialTheme.colorScheme.background
+            ) {
+                BusinessCardApp()
             }
         }
     }
 }
 
 @Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
+fun BusinessCardApp() {
+    // Используем Column для центрирования всего контента на экране (адаптивность)
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(dimensionResource(id = R.dimen.padding_medium)),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.SpaceEvenly
+    ) {
+        // Верхняя часть: Лого, Имя, Группа
+        MainInfoSection()
+
+        // Нижняя часть: Контакты
+        ContactSection()
+    }
 }
 
-@Preview(showBackground = true)
 @Composable
-fun GreetingPreview() {
-    Lab_1_MobileTheme {
-        Greeting("Android")
+fun MainInfoSection() {
+    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+        Image(
+            painter = painterResource(id = R.drawable.my_photo),
+            contentDescription = "My_Photo",
+            modifier = Modifier.size(dimensionResource(id = R.dimen.logo_size))
+//            painter = painterResource(id = R.drawable.my_photo),
+//            contentDescription = null,
+//            modifier = Modifier
+//                .size(dimensionResource(id = R.dimen.logo_size))
+//                .clip(CircleShape)
+        )
+        Text(
+            text = stringResource(id = R.string.full_name),
+            fontSize = dimensionResource(id = R.dimen.text_size_name).value.sp,
+
+            fontWeight = FontWeight.Bold,
+            textAlign = TextAlign.Center
+        )
+
+        Text(
+            text = stringResource(id = R.string.student_group),
+            fontSize = dimensionResource(id = R.dimen.text_size_info).value.sp,
+            //color = Color.Gray,
+            //color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.7f),
+            textAlign = TextAlign.Center
+        )
+    }
+}
+
+@Composable
+fun ContactSection() {
+    Column {
+        ContactItem(icon = Icons.Default.Phone, text = stringResource(id = R.string.contact_phone))
+        ContactItem(icon = Icons.Default.Email, text = stringResource(id = R.string.contact_email))
+        ContactItem(icon = Icons.Default.Info, text = stringResource(id = R.string.contact_telegram))
+    }
+}
+
+@Composable
+fun ContactItem(icon: ImageVector, text: String) {
+    Row(
+        modifier = Modifier.padding(dimensionResource(id = R.dimen.padding_small)),
+        verticalAlignment = Alignment.CenterVertically
+
+    ) {
+        Icon(
+            imageVector = icon,
+            contentDescription = null,
+            tint = MaterialTheme.colorScheme.primary,
+            modifier = Modifier.size(dimensionResource(id = R.dimen.icon_size))
+        )
+        //Spacer(modifier = Modifier.width(dimensionResource(id = R.dimen.padding_medium)))
+        Text(
+            text = text,
+            fontSize = dimensionResource(id = R.dimen.text_size_info).value.sp,
+            modifier = Modifier.padding(start = dimensionResource(id = R.dimen.padding_medium))
+        )
     }
 }
