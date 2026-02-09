@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Лаб 1 Мобильная Разработка</string>
+    <string name="full_name">Малышонков Никита Олегович</string>
+    <string name="student_group">Б23-191-2</string>
+    <string name="contact_email">football76@inbox.ru</string>
+    <string name="contact_phone">+7 (919) 912 97-28</string>
+    <string name="contact_telegram">@NickJr76</string>
+</resources>
